@@ -6,17 +6,9 @@ A collection of bookmarklets for quick actions like PR links (GitHub, GitLab, et
 
 1. Copy the JavaScript code from the bookmarklet you want to use.
 2. Right-click on your bookmarks bar and select "Add Page" or "Add Bookmark."
-3. Name the bookmarklet (e.g., "GitHub PR").
+3. Name the bookmarklet (e.g., "GitLab MR").
 4. Paste the JavaScript code into the URL field.
 5. Save the bookmarklet.
-6. Click the bookmarklet while viewing a page (e.g., a GitHub PR) to call the embedded code.
+6. Click the bookmarklet while viewing a page (e.g., a GitLab MR) to call the embedded code.
 
-
-### Here's an example
-
-A bookmarklet to send a simple alert message to your browser.
-
-```javascript
-javascript:(function(){
-  alert('Hello, this is a test bookmarklet 👋!');
-})();
+## 
