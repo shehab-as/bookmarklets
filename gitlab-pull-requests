@@ -1,0 +1,32 @@
+// ==Bookmarklet==
+// @name GitLab Merge Request
+// @author Shehab Abdel-Salam
+// ==/Bookmarklet==
+
+const stateSelector = ".js-mr-header";
+const titleSelector = ".title.gl-heading-1.gl-block.gl-grow.gl-break-anywhere";
+const diffSelector = ".js-changes-tab-count .gl-badge-content";
+const mrNumberSelector = ".js-mr-header";
+
+// Extract state, title, diff count, and merge request number (IID)
+const stateElement = document.querySelector(stateSelector);
+const titleElement = document.querySelector(titleSelector);
+const diffElement = document.querySelector(diffSelector);
+const mrNumber = stateElement ? stateElement.getAttribute('data-iid') : 'Unknown';
+const state = stateElement ? stateElement.getAttribute('data-state') : 'Unknown';
+const title = titleElement ? titleElement.innerText : 'No Title';
+const diffCount = diffElement ? diffElement.innerText : '0';
+
+// Define emoji based on the state value
+let emoji = "⚪"; // Default to gray (neutral)
+if (state === "opened") {
+  emoji = "🟢"; // Green for opened
+} else if (state === "closed") {
+  emoji = "🔴"; // Red for closed
+} else if (state === "merged") {
+  emoji = "🔵"; // Blue for merged
+}
+
+navigator.clipboard.writeText(
+  `${emoji} ${title} [#${mrNumber}](${document.location.href}) (${diffCount} change(s))`
+);
