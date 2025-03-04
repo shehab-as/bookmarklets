@@ -1,0 +1,28 @@
+// ==Bookmarklet==
+// @name GitLab Merge Request
+// @author Shehab Abdel-Salam
+// ==/Bookmarklet==
+
+const titleSelector = ".title.gl-heading-1.gl-block.gl-grow.gl-break-anywhere";
+const stateSelector = "#content-body > div.merge-request > div.merge-request-details.issuable-details > div.detail-page-description.gl-pt-2.gl-pb-4.gl-flex.gl-items-baseline.gl-flex-wrap.gl-text-subtle.is-merge-request > span > span > span";
+const numberSelector = "#js-vue-page-breadcrumbs-wrapper > nav > ol > li:nth-child(4) > a > span";
+const changeSelector = "#diffs-tab > a > span";
+
+const title = document.querySelector(titleSelector).innerText;
+const state = document.querySelector(stateSelector).innerText.toLowerCase();
+const number = document.querySelector(numberSelector).innerText.substring(1);
+const changeCount = document.querySelector(changeSelector).innerText;
+
+// Define emoji based on the state value
+let emoji = "⚪"; // Default to gray (neutral)
+if (state === "open") {
+  emoji = "🟢"; // Green for opened
+} else if (state === "closed") {
+  emoji = "🔴"; // Red for closed
+} else if (state === "merged") {
+  emoji = "🔵"; // Blue for merged
+}
+
+navigator.clipboard.writeText(
+  `${emoji} ${title} [#${number}](${document.location.href}) (Changes ${changeCount})`
+);
