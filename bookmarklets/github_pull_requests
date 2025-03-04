@@ -1,5 +1,5 @@
 // ==Bookmarklet==
-// @name Pull Requests
+// @name GitHub PR
 // @author Shehab Abdel-Salam
 // ==/Bookmarklet==
 
@@ -15,18 +15,18 @@ const title = document.querySelector(titleSelector);
 const number = document.querySelector(numberSelector);
 const [plus, minus] = document.querySelectorAll(diffSelector);
 
-// Define emoji based on the state value
-let emoji = "⚪"; // Default to gray (neutral)
+// Define emoji based on the PR state
+let emoji = "⚪";
 if (state) {
   const stateText = state.innerText.toLowerCase().trim();
   if (stateText === "open") {
-    emoji = "🟢"; // Green for open
+    emoji = "🟢";
   } else if (stateText === "closed") {
-    emoji = "🔴"; // Red for closed
+    emoji = "🔴";
   } else if (stateText === "merged") {
-    emoji = "🔵"; // Blue for merged
+    emoji = "🔵";
   } else if (stateText === "draft") {
-    emoji = "⚪"; // Gray for draft
+    emoji = "⚪";
   }
 }
 

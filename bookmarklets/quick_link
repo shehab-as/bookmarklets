@@ -1,43 +1,28 @@
 // ==Bookmarklet==
-// @name Slack
+// @name Quick Link
 // @author Shehab Abdel-Salam
 // ==/Bookmarklet==
 
 const url = window.location.href;
-var suffix = null;
-var separator = null;
-var emoji = "🔗"; // Default link emoji
+var emoji = "🔗";
 
 if (url.startsWith("https://docs.google.com/document")) {
-  suffix = "- Google Docs";
-  emoji = "📝";
+  emoji = "📄";
 } else if (url.startsWith("https://app.shortcut.com")) {
-  suffix = "| Shortcut";
   emoji = "🎟️";
 } else if (url.startsWith("https://github.com")) {
-  separator = "·";
   emoji = "🐙";
 } else if (url.startsWith("https://gitlab.com")) {
-  separator = "·";
   emoji = "🦊";
 } else if (url.startsWith("https://bitbucket.org")) {
-  separator = "·";
   emoji = "📦";
 } else if (url.startsWith("https://lucid.app/lucidchart")) {
-  suffix = ": Lucidchart";
   emoji = "🎨";
-} else if (url.startsWith("https://notion.so")) {
-  suffix = "– Notion";
+} else if (url.startsWith("https://www.notion.so")) {
   emoji = "📝";
 }
 
 var title = document.title;
-if (suffix) {
-  title = title.replace(suffix, "").trim();
-}
-if (separator) {
-  title = title.split(separator).slice(0, -1).join(separator).trim();
-}
 
 const text = `${emoji} [${title}](${url})`;
 navigator.clipboard.writeText(text);
