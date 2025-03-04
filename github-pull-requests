@@ -1,0 +1,39 @@
+// ==Bookmarklet==
+// @name Pull Requests
+// @author Shehab Abdel-Salam
+// ==/Bookmarklet==
+
+const stateSelector =
+  "#partial-discussion-header > div.d-flex.flex-items-center.flex-wrap.mt-0.gh-header-meta > div.flex-shrink-0.mb-2.flex-self-start.flex-md-self-center > span";
+const titleSelector =
+  "#partial-discussion-header > div.gh-header-show > div > h1 > bdi";
+const numberSelector =
+  "#partial-discussion-header > div.gh-header-show > div > h1 > span";
+const diffSelector = "#diffstat > span[class^='color']";
+const state = document.querySelector(stateSelector);
+const title = document.querySelector(titleSelector);
+const number = document.querySelector(numberSelector);
+const [plus, minus] = document.querySelectorAll(diffSelector);
+
+// Define emoji based on the state value
+let emoji = "⚪"; // Default to gray (neutral)
+if (state) {
+  const stateText = state.innerText.toLowerCase().trim();
+  if (stateText === "open") {
+    emoji = "🟢"; // Green for open
+  } else if (stateText === "closed") {
+    emoji = "🔴"; // Red for closed
+  } else if (stateText === "merged") {
+    emoji = "🔵"; // Blue for merged
+  } else if (stateText === "draft") {
+    emoji = "⚪"; // Gray for draft
+  }
+}
+
+navigator.clipboard.writeText(
+  `${emoji} ${title.innerText} [${
+    number.innerText
+  }](${
+    document.location.href
+  }) (${plus.innerText.trim()} ${minus.innerText.trim()})`
+);
